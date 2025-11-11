@@ -4,9 +4,9 @@
   "description": "Real-time collaborative drawing web app with Vanilla JS, HTML5 Canvas, Node.js, and Socket.io",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
-    "dev": "NODE_ENV=development node server/server.js"
-  },
+  "start": "node server/server.js",
+  "dev": "nodemon server/server.js"
+},
   "keywords": [
     "canvas",
     "collaboration",
