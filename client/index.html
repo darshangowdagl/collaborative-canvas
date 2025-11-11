@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collaborative Canvas</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Toolbar -->
+      <header class="toolbar" id="toolbar">
+        <div class="brand">
+          <span class="dot"></span>
+          <h1>Collaborative Canvas</h1>
+        </div>
+        <div class="tools" id="tool-controls">
+          <label class="tool-item">
+            <span>Color</span>
+            <input type="color" id="color-picker" value="#1f75fe" />
+          </label>
+          <label class="tool-item">
+            <span>Stroke</span>
+            <input type="range" id="stroke-width" min="1" max="40" value="6" />
+            <span id="stroke-width-value">6</span>
+          </label>
+          <button id="tool-brush" class="tool-button active" title="Brush">Brush</button>
+          <button id="tool-eraser" class="tool-button" title="Eraser">Eraser</button>
+          <button id="undo" class="tool-button" title="Undo (Ctrl+Z)">Undo</button>
+          <button id="redo" class="tool-button" title="Redo (Ctrl+Shift+Z)">Redo</button>
+        </div>
+        <div id="users" class="users"></div>
+      </header>
+
+      <!-- Main workspace -->
+      <main class="workspace">
+        <div class="canvas-wrapper">
+          <canvas id="canvas"></canvas>
+          <div id="cursors"></div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Socket.io client -->
+    <script src="/socket.io/socket.io.js" defer></script>
+    <!-- Correct dependency order -->
+    <script src="utils.js" defer></script>
+    <script src="websocket.js" defer></script>
+    <script src="canvas.js" defer></script>
+    <script src="main.js" defer></script>
+  </body>
+</html>
