@@ -8,12 +8,21 @@ const { RoomsManager } = require('./rooms');
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server, { cors: { origin: '*' } });
 
-const PORT = process.env.PORT || 3000;
+// Configure Socket.io with CORS
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+
+// Use Render’s dynamic port and 0.0.0.0 for hosting
+const PORT = process.env.PORT || 10000;
+const HOST = '0.0.0.0';
+
 const PUBLIC_DIR = path.join(__dirname, '..', 'client');
 const DEFAULT_ROOM = 'lobby';
-
 const rooms = new RoomsManager();
 
 // Serve static frontend
@@ -120,6 +129,10 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+// Prevent timeout issues on Render
+server.keepAliveTimeout = 120 * 1000;
+server.headersTimeout = 120 * 1000;
+
+server.listen(PORT, HOST, () => {
+  console.log(`Server running at http://${HOST}:${PORT}`);
 });
